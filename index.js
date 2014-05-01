@@ -6,6 +6,11 @@ function Class(arguments) {
     
     }
 
+  for (method in arguments) {
+    if (typeof(arguments[method]) == 'function' && method != 'initialize')
+      this.constructor.prototype[method] = arguments[method];
+  }
+
   return this.constructor;
 };
 
