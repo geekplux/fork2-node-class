@@ -1,0 +1,26 @@
+{
+  "name": "Simple-Class",
+  "version": "0.0.0",
+  "description": "Implement CoffeeScript's Class System",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/geekplux/fork2-node-class.git"
+  },
+  "keywords": [
+    "Class"
+  ],
+  "author": "GeekPlux",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/geekplux/fork2-node-class/issues"
+  },
+  "homepage": "https://github.com/geekplux/fork2-node-class",
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "mocha": "^1.18.2"
+  }
+}

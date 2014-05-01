@@ -1,4 +1,4 @@
-fork2-node-class
+Node Training
 ================
 
-learn Node
+Warmup 4 - Implement CoffeeScript's Class System
