@@ -1,13 +1,15 @@
 function Class(child, parent) {
   for (var method in child) {
     if (child[method].hasOwnProperty && typeof(child[method]) == 'function' && method != 'initialize')
-      this.constructor.prototype[method] = child[method];
+      child.constructor.prototype[method] = child[method];
   }
 
   if (typeof(parent == 'function'))
-    this.constructor.prototype = parent;
+    child.constructor.prototype = parent;
 
-  return this.constructor;
+  child.constructor.__super__ = parent;
+
+  return child.constructor;
 };
 
 module.exports = Class;
