@@ -1,15 +1,11 @@
-function Class(arguments) {
-  if (arguments.initialize)
-    this.constructor = arguments.initialize;
-  else
-    this.constructor = function() {
-    
-    }
-
-  for (method in arguments) {
-    if (typeof(arguments[method]) == 'function' && method != 'initialize')
-      this.constructor.prototype[method] = arguments[method];
+function Class(child, parent) {
+  for (var method in child) {
+    if (child[method].hasOwnProperty && typeof(child[method]) == 'function' && method != 'initialize')
+      this.constructor.prototype[method] = child[method];
   }
+
+  if (typeof(parent == 'function'))
+    this.constructor.prototype = parent;
 
   return this.constructor;
 };
