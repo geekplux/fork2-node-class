@@ -1,15 +1,41 @@
-function Class(child, parent) {
-  for (var method in child) {
-    if (child[method].hasOwnProperty && typeof(child[method]) == 'function' && method != 'initialize')
-      child.constructor.prototype[method] = child[method];
+var CTOR_NAME = 'initialize';
+
+
+var Class = function(properties, parent) {
+
+  var ctor = function() {
+    if (properties.hasOwnProperty(CTOR_NAME))
+      properties[CTOR_NAME].apply(this, arguments);
+  };
+
+  for (var method in properties) {
+    if (!properties.hasOwnProperty(method))
+      continue;
+    if (method === CTOR_NAME)
+      continue;
+
+    ctor.prototype[method] = properties[method];
   }
 
-  if (typeof(parent == 'function'))
-    child.constructor.prototype = parent;
+  var extend = function(child, parent) {
+    parent = parent || Object;
 
-  child.constructor.__super__ = parent;
+    child.prototype.__proto__ = parent.prototype;
+    child.__super__ = parent;
 
-  return child.constructor;
+    var currentClass = child;
+    child.prototype.super = function(method) {
+      var args = [].slice.call(arguments, 1);
+      currentClass = currentClass.__super__;
+      result = currentClass.prototype[method].apply(this, args);
+      currentClass = child;
+      return result;
+    }
+  };
+
+  extend(ctor, parent);
+
+  return ctor;
 };
 
 module.exports = Class;
