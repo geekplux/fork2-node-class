@@ -20,8 +20,8 @@ var Class = function(properties, parent) {
   var extend = function(child, parent) {
     parent = parent || Object;
 
-    child.prototype.__proto__ = parent.prototype;
     child.__super__ = parent;
+    child.prototype.__proto__ = parent.prototype;
 
     var currentClass = child;
     child.prototype.super = function(method) {
@@ -31,6 +31,7 @@ var Class = function(properties, parent) {
       currentClass = child;
       return result;
     }
+
   };
 
   extend(ctor, parent);
